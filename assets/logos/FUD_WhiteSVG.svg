@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2372 1679">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        letter-spacing: .02em;
+      }
+
+      .cls-3 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-4 {
+        font-family: Geist-Bold, Geist;
+        font-size: 519.04px;
+        font-variation-settings: 'wght' 700;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" width="2372" height="1679"/>
+  <text class="cls-4" transform="translate(659.62 1017.05)"><tspan x="0" y="0">F</tspan><tspan class="cls-2" x="313.49" y="0">U</tspan><tspan class="cls-3" x="686.16" y="0">D</tspan><tspan x="1049.48" y="0">.</tspan></text>
+</svg>
