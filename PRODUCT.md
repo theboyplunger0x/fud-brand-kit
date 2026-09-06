@@ -1,80 +1,44 @@
-# FUD.markets — Product & Terminology
+# FUD Markets V2 — Product Vocabulary for Designers
 
-Read this so the designs match how FUD actually works. Do not invent mechanics
-that are not here.
+FUD's current source describes **Solana-native LONG and SHORT share markets on token prices**. This document is a UI orientation, not a specification for contracts, pricing, or settlement. The public frontend's `src/lib/v2Types.ts`, `src/lib/v2Market.ts`, and `src/components/v2/` are the implementation references.
 
-## What FUD is (one paragraph)
+Do not reuse the archived V1 model of distributing a losing pool, a fixed 10% fee, fixed legacy timeframes, or a prohibition on selling positions. V2 exposes share positions, orders, quotes, and sell previews.
 
-FUD is a crypto prediction market. You pick a token, choose a **timeframe**, and bet
-**LONG** (price goes up) or **SHORT** (price goes down) by staking USDC. Everyone's
-stake goes into two pools: the **LONG pool** and the **SHORT pool**. When the
-timeframe ends, the token's price is checked against the **entry price**. The
-winning side splits the losing pool (minus a fee), pro-rata to their stake. If the
-price barely moved (below a small threshold) the market is a **draw** and everyone
-is refunded. It is pari-mutuel (pooled), not an order book.
+## Typical UI journey
 
-## Main flow
+1. Browse a token/timeframe market and its status.
+2. Inspect the market detail, token entry/live price, and LONG/SHORT share quote.
+3. Select a side and amount; review the current estimate and warnings.
+4. Submit in the real app; show the returned matching/confirmation/fill state accurately. In a design preview, simulate and label this action.
+5. Inspect positions and orders. Selling or cancelling is available only when the current app allows it; never imply an instant or guaranteed exit.
+6. Display the actual settled, void, or cancelled result when supplied. Do not invent refund amounts or settlement rules in UI work.
 
-1. Browse markets in the **feed** (each is a token + timeframe).
-2. Open a market, pick **LONG** or **SHORT**.
-3. Enter an amount (quick amounts: **$10, $25, $50, $100**).
-4. See your **multiplier** and potential payout before confirming.
-5. Bet is placed, your stake joins that side's pool.
-6. Timeframe runs (**live**). At close, the market **settles**.
-7. **Resolved:** winners get their stake back plus a share of the loser pool
-   (minus fee). Losers lose their stake. **Draw / one-sided:** refund.
+## Terms and units
 
-## Canonical terminology (use these exact words, do not invent synonyms)
-
-| Term | Meaning |
+| Term | Design meaning |
 |---|---|
-| **LONG** / **SHORT** | The two sides. Price up = LONG, price down = SHORT. Not "buy/sell". |
-| **LONG pool / SHORT pool** | Total USDC staked on each side. |
-| **Multiplier** | Payout multiple if your side wins: `1 + (otherPool * 0.90) / yourPool`. |
-| **Timeframe** | Duration of the market. Fixed set: **5m, 15m, 1h, 4h, 12h, 24h**. |
-| **Entry price** | The token price when the market opened. Outcome compares vs this. |
-| **Fee** | 10% of the losing pool (kept by the protocol). |
-| **Settle / Resolve** | The market closing and paying out. |
-| **Draw** | Price moved less than the threshold. Everyone refunded. |
-| **Refund / Cancelled** | One-sided market (no opponents) or draw. Stake returned. |
-| **PnL** | Profit and loss. Always shown in monospace, tabular-nums. |
-| **Vault** | Where the user's USDC balance lives (their on-chain balance). |
-| **FUD Points** | Season points campaign that rewards volume and content, convertible to the future $FUD token. Shown as an "Estimated FUD Points" pill. |
+| LONG / SHORT | The two market sides; preserve the labels and semantic green/red colors |
+| Token entry / live price | Price of the underlying token in USD, not the share price |
+| Share price | Price in cents; display distinctly from the underlying token price |
+| Shares | Position/order quantity; owned, locked, matching, and confirmed amounts may differ |
+| Multiplier / estimated payout | Quote-related display, not the V1 losing-pool formula or a promised return |
+| Available balance | Amount available to act with; not interchangeable with total or earmarked balance |
+| Buy / sell order | Action on a specified LONG/SHORT side; do not rename the market sides BUY/SELL |
+| Matching / partial fill | Intermediate states; do not present the whole requested amount as confirmed |
+| Sell preview | Current executability/proceeds estimate; may be partial or unavailable |
+| PnL | Profit/loss; keep realized and displayed position metrics distinct |
+| Timeframe | Market duration; use the app's configured options, not an invented fixed menu |
 
-## States (design all of these, do not skip the edge states)
+Keep numeric values monospace and tabular. Use explicit units and qualifiers. Missing quote data must not silently become a real 50/50 executable price; mock indicative values must be labelled as such.
 
-**Market status:** `open` (accepting bets, not started) → `live` (timeframe
-running) → `settling` (closing, computing result) → then one terminal state:
-`resolved` (has a winner side), `cancelled` (one-sided, refund), or `draw`
-(flat, refund).
+## States to preserve
 
-**Position outcome (after settle):** won, lost, refunded (cancelled), draw.
+The source market status union is `pending`, `live`, `resolving`, `settled`, `void`, or `cancelled`. The outcome may be `long`, `short`, `draw`, `void`, or absent. Status and outcome are separate fields, not an interchangeable sequence of labels.
 
-**UI states (every list/card must handle these):**
-- **loading** (skeleton, not a spinner-only blank)
-- **empty** (no markets / no positions yet, with a nudge to act)
-- **error** (something failed, retry affordance)
+The UI also needs loading/empty/error states, invalid amount, disabled action with a reason, submitting, matching, partial/filled results, and failed/cancelled actions as applicable. Respect locked shares and outstanding orders when presenting available quantities.
 
-**Trade action states (the bet flow, design all of them):**
-- **default** (side + amount picked, multiplier + payout shown)
-- **invalid** (amount below min, over balance, market closing) with a clear reason
-- **submitting** (bet sent)
-- **pending confirmation** (on-chain, brief wait)
-- **success** (bet placed, position appears)
-- **failed** (retry affordance, clear plain-language error, no jargon)
+Fees, tradeable timeframes, eligibility, and executable amounts come from the runtime/application. Do not hardcode rules from this kit. Market-token chain metadata is also distinct from the Solana settlement platform.
 
-**Interaction states** for buttons / cards / inputs: hover, focus (visible),
-pressed, selected, and disabled. Disabled must look clearly disabled, not just dim.
+## Copy boundaries
 
-## Do NOT invent
-
-FUD does **not** have: an order book, leverage sliders, perpetuals, staking/yield,
-NFTs, in-app chat, or custom timeframes. Do not add sell-my-position-midway
-(v1 has no secondary market). Keep the timeframes fixed to the set above. If a
-screen needs a mechanic that is not described here, flag it to Marcos instead of
-inventing it.
-
-## Compare against the real product
-
-Live app: **https://fud.markets** . Open it (dark mode) to see the real feed,
-market cards, and trade flow before designing.
+Use short, clear trading language. No invented leverage, perpetuals, yield, chat features, guaranteed fills, or future token conversion promises. If a requested UI would change financial behavior or authentication, ask for approval before designing that extension.

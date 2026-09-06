@@ -1,113 +1,70 @@
-# FUD.markets — Design System (real tokens)
+# FUD Markets — V2 BLUE Design System
 
-This is the actual system from the production app, condensed. It is a hand-rolled
-system on **Tailwind v4** (CSS-first, no `tailwind.config`) with a **custom JS
-dark/light theme** (no next-themes, no shadcn). The canonical in-repo reference is
-`reference/fud-brand-page.tsx` (the live `/brand` page).
+Current direction: **white canvas, FUD blue, near-black ink, 3D wordmark, and restrained blue glass surfaces**. Dark mode is supported with an accessible lighter blue primary. Green and red communicate LONG/SHORT and financial direction, not the overall brand.
 
-## 1. Palette
+Exact values live in [reference/tokens.css](reference/tokens.css); full Tailwind mappings and component treatments live in [reference/source-styles.css](reference/source-styles.css). These reflect the source snapshot and dark correction described in [reference/README.md](reference/README.md).
 
-| Name | Hex | Tailwind | Meaning |
-|---|---|---|---|
-| Canvas (near-black) | `#0A0A0A` / `#080808` | `bg-[#0A0A0A]` | Background |
-| White | `#FFFFFF` | `text-white` | Text / logo on dark |
-| Emerald | `#34D399` | `emerald-400` | LONG · up · positive · win · accent |
-| Red | `#F87171` | `red-400` | SHORT · down · negative · loss |
-| Light canvas | `#F9FAFB` | | Light-mode background |
-| Light text | `#111827` | `text-gray-900` | Light-mode text |
+## Palette
 
-**Signal rule:** color is reserved for meaning. Emerald = LONG/win, red = SHORT/loss.
-Everything else is monochrome (white/black + opacity). Never use color as decoration.
-
-## 2. Typography
-
-- **Geist** (sans) — headings `font-black` (900), tight tracking. In-app the "FUD."
-  wordmark is rendered as text in Geist Black; the logo SVG asset is drawn in Geist
-  Bold (700), so treat the logo files as the canonical wordmark and use 900 only when
-  setting "FUD." as live text.
-- **Geist Mono** — ALL numbers, prices, PnL, multipliers. Always `font-mono tabular-nums`.
-- **Inter** — UI body text, medium (500).
-
-> **Font sourcing:** Geist, Geist Mono, and Inter are all free on Google Fonts (Lovable
-> can pull them natively — just name them). The `Inter-700.woff` / `Inter-900.woff` in
-> `assets/fonts/` are optional convenience copies; get Inter 500 (body) from Google Fonts.
-
-Weights: Black (900) headings, Bold (700) labels, Medium (500) body.
-
-| Role | Classes |
-|---|---|
-| Wordmark "FUD." | `text-[40px] font-black tracking-[-0.04em] leading-none` (the `.` is emerald) |
-| H1 | `text-[24px] sm:text-[30px] font-black leading-[1.1] tracking-tight` |
-| Section label | `text-[10px] font-black uppercase tracking-[0.18em] text-white/30` |
-| Body | `text-[12px]`/`text-[13px] text-white/50 font-medium leading-relaxed` |
-| Numbers / PnL | `text-[18px] font-mono tabular-nums text-emerald-400` |
-| Pill / tag | `text-[12px] font-bold px-3 py-1 rounded-full` |
-
-**Wide tracking on tiny uppercase labels is a signature** (`tracking-[0.18em]`, `tracking-widest`).
-Tight tracking on big headings (`tracking-tight`, `tracking-[-0.04em]`).
-
-## 3. Surfaces & hierarchy (dark)
-
-- Card: `rounded-2xl border border-white/8 bg-white/[0.03]`, hover `hover:border-white/14`
-- Section divider: `border-t border-white/[0.06] pt-8 mt-8`
-- Pills: `text-[11px] font-bold px-3 py-1 rounded-full bg-white/[0.04] border border-white/10`
-- Opacity ladder (text): `white → /55 → /50 → /45 → /40 → /35 → /30 → /25 → /20`
-- Radius: `rounded-2xl` cards, `rounded-xl` media, `rounded-full` pills, `rounded-md` tooltips
-
-### Dark ↔ light pairs (the real "tokens")
-| Purpose | dark | light |
+| Role | Light (default) | Dark |
 |---|---|---|
-| Primary text | `text-white` | `text-gray-900` |
-| Muted text | `text-white/40` | `text-gray-400` |
-| Secondary text | `text-white/55` | `text-gray-600` |
-| Inverted button | `bg-white text-black` | `bg-gray-900 text-white` |
-| Border | `border-white/8` | `border-gray-200` |
-| LONG chip | `text-emerald-300 bg-emerald-500/20` | `text-emerald-700 bg-emerald-100` |
-| SHORT chip | `text-red-300 bg-red-500/20` | `text-red-700 bg-red-100` |
+| Canvas | `oklch(1 0 0)` / white | `oklch(0.13 0 0)` |
+| Ink | `oklch(0.17 0.008 265)` | `oklch(0.98 0 0)` |
+| Card / popover | `oklch(1 0 0)` | `oklch(0.16 0 0)` |
+| Brand primary, ring, sidebar primary | `oklch(0.452 0.313 264.05)` / FUD blue `#0000FF` | `oklch(0.68 0.18 280)` |
+| Text on primary | White | `oklch(0.13 0 0)` |
+| Muted surface | `oklch(0.972 0.008 268)` | `oklch(0.2 0 0)` |
+| Muted text | `oklch(0.53 0.02 266)` | `oklch(0.68 0 0)` |
+| Border | `oklch(0.92 0.012 266)` | White at 8% |
+| LONG / up | `oklch(0.66 0.17 155)` | `oklch(0.77 0.15 162)` |
+| SHORT / down | `oklch(0.62 0.23 22)` | `oklch(0.68 0.21 22)` |
+| LONG soft surface | `oklch(0.958 0.045 155)` | `oklch(0.24 0.05 162)` |
+| SHORT soft surface | `oklch(0.962 0.035 22)` | `oklch(0.24 0.06 22)` |
 
-## 3b. Spacing, radius, breakpoints
+Use `primary` for navigation, selected controls, focus rings, and brand emphasis. Use `up`/`down` for financial signals and side controls. Keep side labels/icons visible: color alone never explains a trade. Unavailable values, neutral states, draw/void, and zero PnL are not positive outcomes.
 
-- **Spacing:** standard Tailwind scale. Common in-app values: card padding `p-4`,
-  gaps `gap-2` / `gap-2.5` / `gap-3`, page container `mx-auto max-w-2xl px-5 py-12`,
-  section rhythm `pt-8 mt-8`. Keep it tight and dense (trading terminal), not airy.
-- **Radius:** `rounded-2xl` cards, `rounded-xl` media, `rounded-full` pills/avatars,
-  `rounded-md` tooltips. Holo wrappers `18px`.
-- **Breakpoints:** mobile-first. The app mainly uses the `sm:` breakpoint (640px) to
-  step type up (e.g. `text-[24px] sm:text-[30px]`). **Mobile is the primary target**
-  (most users are on phones), so design mobile first, then desktop.
-- **Shadows:** almost none. Depth comes from opacity + hairline borders, not drop
-  shadows. The only "glow" is the holo prestige borders.
+The public landing preview uses blue glass accents based on `#0000ff`, a deliberate `#3138ff` headline, near-black ink, and white. Its exported layout lives in the public frontend's `src/landing-preview.css` and `src/routes/landing.tsx`; do not substitute the archived black/emerald design.
 
-## 4. Prestige (gold / rose holo borders)
+The dark brand primary renders approximately as sRGB `#8587FF`; retain the exact OKLCH token above. The source teaser also uses the deliberate headline-blue variant `#3138FF`. These are role-specific variants, not a change to the light brand's `#0000FF`.
 
-Status is shown through motion, not chrome. Animated conic-gradient borders:
-- **Gold holo** = official / admin (most prestigious): conic `#7d5a00 → #ffd700 → #fff6a0`, gold glow.
-- **Rose holo** = market maker (subtler): conic `#5a1a2a → #f43f5e → #fb7185`.
-- Gold gradient username for official team: `#fbbf24 → #f59e0b → #fbbf24`, weight 900, clipped to text.
+## Typography
 
-(The full CSS keyframes live in the app's `globals.css`. For design purposes: an
-animated spinning gold/rose glowing border around a near-black card.)
+- **DM Sans** — UI and headings; frontend font request includes 400, 500, and 700.
+- **JetBrains Mono** — prices, PnL, balances, shares, odds, and multipliers; font request includes 400, 600, and 700.
+- Use tabular figures. The source `.num` utility sets the mono family, `"tnum"`, and `-0.02em` tracking; `tabular-nums` is also appropriate for numerical UI.
+- Main headings use tight tracking. Market cards combine bold symbols, compact labels, and a clearly differentiated numeric hierarchy.
 
-## 5. Visual voice
+Font stylesheet used by the frontend:
 
-Near-black trading terminal meets editorial zine. A `#0A0A0A` canvas carries
-ultra-thin `white/3%` cards with hairline `white/8` borders. Tiny uppercase labels
-at wide `0.18em` tracking act as section rules. Numbers are always monospace +
-tabular-nums so prices/PnL/multipliers read like a terminal. Two-color signal
-system (emerald = LONG/win, red = SHORT/loss), color only for meaning, everything
-else monochrome on an opacity ladder. Prestige encoded as motion (gold/rose holo
-borders). Type is heavy and confident: Geist Black headings, Inter medium body.
-Tone: degen, sharp, anti-bullshit, trading-native. Talk like a trader, not a bank.
+```text
+https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;600;700&display=swap
+```
 
-## 6. Assets in this kit
+No active font binaries are bundled. Do not use the archived Geist/Inter instructions as a fallback identity.
 
-- `assets/logos/` — FUD wordmark logo, white + black, SVG + PNG. **Caveat:** the SVGs
-  contain live `<text>` (they need the Geist font to render) and a background rectangle,
-  so they are not transparent cutouts. For a clean transparent logo, use the PNG or
-  outline the text. The PNGs are very high-res, downscale as needed.
-- `assets/icons/` — app icon / favicon.
-- `assets/reference/` — real share cards (win / loss / bot). These show the brand
-  attitude and color, but they are meme/illustration art, **not** product UI. Use them
-  for mood, not for trading-flow layout.
-- `assets/fonts/` — Inter 700 / 900 (optional). Geist + Geist Mono come free from Google Fonts.
-- `reference/fud-brand-page.tsx` — the live in-app brand/tokens page, for exact class strings.
+## Surfaces, spacing, and motion
+
+- Market card: `overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md`.
+- Card content starts at `p-4`; use compact `gap-1.5` / `gap-3` groupings. Preserve readability and touch targets on narrow screens.
+- Base radius is `0.875rem` (14px at the default root size): `rounded-lg` 14px, `rounded-xl` 18px, `rounded-2xl` 22px under the source theme mapping. Pills remain `rounded-full`.
+- LONG/SHORT controls use their semantic colors with soft tinted fill and border; general calls to action use blue.
+- `.fud-glass-primary`: blue 14% fill, blue 18% border, blue shadow, 2px backdrop blur. Hover increases fill to 23%.
+- `.fud-glass-hero` uses a subtle blue linear gradient, white highlight, and layered shadow. `.fud-hero-cta` uses a stronger blue fill with white text.
+- Dark glass treatments are defined explicitly in the source stylesheet; do not invert light colors mechanically.
+- Keep hover lifts and transitions restrained. Respect reduced-motion preferences in prototypes; trading state changes must remain understandable without animation.
+
+Use the public frontend as the layout reference rather than inventing a new breakpoints system. Verify mobile and desktop, including long tickers, tiny prices, large balances, sheets/dialogs, and visible focus states.
+
+## Logos and imagery
+
+Use [ASSETS.md](ASSETS.md). The current light navigation uses `fud-3d-wordmark-blue.jpg`; preserve the source crop and aspect ratio when reproducing that shell. Other 3D variants are source alternatives, not a license to generate a new mark. Use the transparent PNG when a cutout is required.
+
+The source dark navigation still uses the monochrome `fud-icon.png`. The current favicon/social utilities also retain monochrome styling. Their presence is intentional; it does not make the blue primary optional. Do not label these utility assets as newly blue or recolor them silently.
+
+Do not stretch imagery or add invented effects. Existing 3D material and reflections belong to the supplied image. Old win/loss/bot illustrations are historical references under `archive/v1/`, not the current mood board.
+
+## Voice and states
+
+Short, confident, trading-native. Use LONG and SHORT. Marketing may be playful; balances, fees, order matching, selling, errors, and settlement copy must be literal and clear. Never promise a fill, payout, token reward, or production availability from a design fixture.
+
+Cover loading, empty, error, disabled, selected, submitting, matching, partially filled, and terminal states as applicable. See [PRODUCT.md](PRODUCT.md) for the V2 terminology boundary.

@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "identity": "FUD Markets V2 BLUE",
+  "sourceRepository": "https://github.com/theboyplunger0x/fud-rebrand-frontend",
+  "sourceBaselineCommit": "c26fa4946bfb4ac3c5287155dceb0235e48a4789",
+  "styleCorrection": "Source baseline plus dark primary/ring/sidebar-primary/sidebar-ring/chart-1 set to oklch(0.68 0.18 280); semantic up/down unchanged.",
+  "archiveSourceCommit": "a4b32620f0a6b644bb475c75d20389602d61e2d0",
+  "assets": [
+    {
+      "path": "assets/logos-v2/fud-3d-wordmark-black.jpg",
+      "sourcePath": "public/fud-3d-wordmark-black.jpg",
+      "sha256": "695b3e12c7d11e31284d4dbb314ac92df24c7da9c218f483cd07f1a0ecca182d"
+    },
+    {
+      "path": "assets/logos-v2/fud-3d-wordmark-blue.jpg",
+      "sourcePath": "public/fud-3d-wordmark-blue.jpg",
+      "sha256": "3d76e38d3a1fee455921cccbe5571e3ba04088256263821a029adb39dbb3d1a1"
+    },
+    {
+      "path": "assets/logos-v2/fud-3d-wordmark-transparent.png",
+      "sourcePath": "public/fud-3d-wordmark-transparent.png",
+      "sha256": "466907710dc0aaaaf19c7d7054a6600dd6181ff2330d119dea2a19e9a844be6a"
+    },
+    {
+      "path": "assets/logos-v2/fud-3d-wordmark.jpg",
+      "sourcePath": "public/fud-3d-wordmark.jpg",
+      "sha256": "cf6b0c2a17716d7904d9bc6103c763e256b916f0d831bb5be8161b32886ed9ff"
+    },
+    {
+      "path": "assets/utility/apple-touch-icon.png",
+      "sourcePath": "public/apple-touch-icon.png",
+      "sha256": "72920bcb76bfa313e582df4cfc6e2e8fa89478d86c02b78c83b853b4b168ecdc"
+    },
+    {
+      "path": "assets/utility/favicon.ico",
+      "sourcePath": "public/favicon.ico",
+      "sha256": "5770dd92a0b82a96e6d29533e545014045394dda16aafdce822aa6003b6b0cc8"
+    },
+    {
+      "path": "assets/utility/fud-icon.png",
+      "sourcePath": "public/fud-icon.png",
+      "sha256": "87931c8fe15e81d22b0bc03789d5c2d01b8ad868f61100e2dde39bc834d9a2c3"
+    },
+    {
+      "path": "assets/utility/profile-avatar.svg",
+      "sourcePath": "public/profile-avatar.svg",
+      "sha256": "3d561ea71c49aacd225b135bf04b964b149017e7bc0cc0e756a082fee045a9ce"
+    },
+    {
+      "path": "assets/reference-v2/fud-social-card.png",
+      "sourcePath": "public/fud-social-card.png",
+      "sha256": "e00396c363df6613f63bd7313db2e3aaede5b0357899bdc3200c5ea2467d5321"
+    },
+    {
+      "path": "assets/reference-v2/fud-wojak-white-sunglasses.jpg",
+      "sourcePath": "public/fud-wojak-white-sunglasses.jpg",
+      "sha256": "3ab4c5e40f1210aeafbae70a9b5c75f5285d7cd6b298c7e4c279175d3414e525"
+    }
+  ],
+  "references": [
+    {
+      "path": "reference/source-styles.css",
+      "sha256": "6dc07a46b2476faefbbcf10ffac577505a7868904d3da203be831bdd73c3e7aa"
+    },
+    {
+      "path": "reference/tokens.css",
+      "sha256": "8a339e1fce744ee409e004bb8505a07473e9392f7d0b7b996baa2ae1099f5123"
+    }
+  ],
+  "archive": [
+    {
+      "path": "archive/v1/DESIGN_SYSTEM.md",
+      "sourcePath": "DESIGN_SYSTEM.md",
+      "sha256": "1e51e84ee7104a7662fd60e72969e3c534a9cfa362a9eb0f6f100f3d39dc3ca3"
+    },
+    {
+      "path": "archive/v1/LOVABLE_BRIEF.md",
+      "sourcePath": "LOVABLE_BRIEF.md",
+      "sha256": "4c2a5240cfc116b54fa732ce6602127bc5a34805146f78611618988c610ff66d"
+    },
+    {
+      "path": "archive/v1/MOCK_DATA.md",
+      "sourcePath": "MOCK_DATA.md",
+      "sha256": "25d84dac0fcd12f9fdbd1d549eeab505f80dc6a5937e8865e4860d489edf1396"
+    },
+    {
+      "path": "archive/v1/PRODUCT.md",
+      "sourcePath": "PRODUCT.md",
+      "sha256": "b48ed02cd4fbe5747c216ca33a0b7ef02c3004ff7ff658e4b4405ce2ababbc5a"
+    },
+    {
+      "path": "archive/v1/README.md",
+      "sourcePath": "README.md",
+      "sha256": "785f9bc9bfeb85732a1a25f52250de824d5fcd079a72576b72be50e4fdcd82dd"
+    },
+    {
+      "path": "archive/v1/SCOPE.md",
+      "sourcePath": "SCOPE.md",
+      "sha256": "9c973ed8a7b935440cb6e4e002db2603934736866bfd676b0ab978090b77a089"
+    },
+    {
+      "path": "archive/v1/assets/fonts/Inter-700.woff",
+      "sourcePath": "assets/fonts/Inter-700.woff",
+      "sha256": "7c5ed5655730de337704d3fc94628515cd7e3d8d32368871709bf56ac0397e7a"
+    },
+    {
+      "path": "archive/v1/assets/fonts/Inter-900.woff",
+      "sourcePath": "assets/fonts/Inter-900.woff",
+      "sha256": "59c48a0598e411bff4644447087b60154a8aec13704193b1ecb2f34a2e3d348f"
+    },
+    {
+      "path": "archive/v1/assets/icons/apple-icon.png",
+      "sourcePath": "assets/icons/apple-icon.png",
+      "sha256": "74d25fcf2c41573b09f23d8b25f974b6f1d36c2ebd0d080e1282464bd98462c0"
+    },
+    {
+      "path": "archive/v1/assets/icons/icon.png",
+      "sourcePath": "assets/icons/icon.png",
+      "sha256": "74d25fcf2c41573b09f23d8b25f974b6f1d36c2ebd0d080e1282464bd98462c0"
+    },
+    {
+      "path": "archive/v1/assets/logos/FUD_BlackLogo.png",
+      "sourcePath": "assets/logos/FUD_BlackLogo.png",
+      "sha256": "da8aee4e28a9ae4c6f207e536e16e73b4d3116a63bb9b16f16ba29dee4cda650"
+    },
+    {
+      "path": "archive/v1/assets/logos/FUD_BlackSVG.svg",
+      "sourcePath": "assets/logos/FUD_BlackSVG.svg",
+      "sha256": "fcbd2a817ee4d62ab05964e6d37dfa4faf54468b32cbef294d0469eda3c1aee8"
+    },
+    {
+      "path": "archive/v1/assets/logos/FUD_WhiteLogo.png",
+      "sourcePath": "assets/logos/FUD_WhiteLogo.png",
+      "sha256": "60f4358c80dfca870a15689749ce6ebe09582720dedcc085d60b78d3fe4545a7"
+    },
+    {
+      "path": "archive/v1/assets/logos/FUD_WhiteSVG.svg",
+      "sourcePath": "assets/logos/FUD_WhiteSVG.svg",
+      "sha256": "8232005d726c437eb506b64ebb780ad45abcb6bdb468713811fffe8f13ea062f"
+    },
+    {
+      "path": "archive/v1/assets/reference/fud-bot-card.png",
+      "sourcePath": "assets/reference/fud-bot-card.png",
+      "sha256": "fce90e9b8111d60db5a167de61a7618429df1ddf42a4ea5c5e62ff18f7fd61a7"
+    },
+    {
+      "path": "archive/v1/assets/reference/share-loss.png",
+      "sourcePath": "assets/reference/share-loss.png",
+      "sha256": "1e9b7dffa4ee9f282f76b37718e43e5c92cc7345f75502ee2bb521c070b291ee"
+    },
+    {
+      "path": "archive/v1/assets/reference/share-win.png",
+      "sourcePath": "assets/reference/share-win.png",
+      "sha256": "5aa44f25e1322b6e765b781febd93e0350bdd5e9e5db4badbf30e78f94a576c7"
+    },
+    {
+      "path": "archive/v1/reference/fud-brand-page.tsx",
+      "sourcePath": "reference/fud-brand-page.tsx",
+      "sha256": "264fee5fb6a10e55b1b1e473e484783d2efb9d6e9d3f542169a81ff28a33febc"
+    }
+  ]
+}

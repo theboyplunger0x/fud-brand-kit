@@ -1,0 +1,83 @@
+/* V2 BLUE plain-CSS tokens. Extracted from source-styles.css; fonts added to :root. */
+:root {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius: 0.875rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.17 0.008 265);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.17 0.008 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.17 0.008 265);
+  /* FUD Blue #0000FF */
+  --primary: oklch(0.452 0.313 264.05);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.967 0.014 268);
+  --secondary-foreground: oklch(0.452 0.313 264.05);
+  --muted: oklch(0.972 0.008 268);
+  --muted-foreground: oklch(0.53 0.02 266);
+  --accent: oklch(0.955 0.022 268);
+  --accent-foreground: oklch(0.452 0.313 264.05);
+  --destructive: oklch(0.6 0.23 25);
+  --destructive-foreground: oklch(1 0 0);
+  --up: oklch(0.66 0.17 155);
+  --up-foreground: oklch(1 0 0);
+  --up-soft: oklch(0.958 0.045 155);
+  --down: oklch(0.62 0.23 22);
+  --down-foreground: oklch(1 0 0);
+  --down-soft: oklch(0.962 0.035 22);
+  --border: oklch(0.92 0.012 266);
+  --input: oklch(0.92 0.012 266);
+  --ring: oklch(0.452 0.313 264.05);
+  --chart-1: oklch(0.452 0.313 264.05);
+  --chart-2: oklch(0.66 0.17 155);
+  --chart-3: oklch(0.62 0.23 22);
+  --chart-4: oklch(0.75 0.15 250);
+  --chart-5: oklch(0.55 0.02 266);
+  --sidebar: oklch(0.98 0.008 268);
+  --sidebar-foreground: oklch(0.17 0.008 265);
+  --sidebar-primary: oklch(0.452 0.313 264.05);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.955 0.022 268);
+  --sidebar-accent-foreground: oklch(0.452 0.313 264.05);
+  --sidebar-border: oklch(0.92 0.012 266);
+  --sidebar-ring: oklch(0.452 0.313 264.05);
+}
+
+.dark {
+  --background: oklch(0.13 0 0);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.16 0 0);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.16 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+  /* Accessible blue on dark surfaces; green remains a LONG / positive signal. */
+  --primary: oklch(0.68 0.18 280);
+  --primary-foreground: oklch(0.13 0 0);
+  --secondary: oklch(0.2 0 0);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.2 0 0);
+  --muted-foreground: oklch(0.68 0 0);
+  --accent: oklch(0.2 0 0);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.63 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --up: oklch(0.77 0.15 162);
+  --up-foreground: oklch(0.13 0 0);
+  --up-soft: oklch(0.24 0.05 162);
+  --down: oklch(0.68 0.21 22);
+  --down-foreground: oklch(0.13 0 0);
+  --down-soft: oklch(0.24 0.06 22);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.68 0.18 280);
+  --chart-1: oklch(0.68 0.18 280);
+  --sidebar: oklch(0.16 0 0);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.68 0.18 280);
+  --sidebar-primary-foreground: oklch(0.13 0 0);
+  --sidebar-accent: oklch(0.2 0 0);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: oklch(0.68 0.18 280);
+}

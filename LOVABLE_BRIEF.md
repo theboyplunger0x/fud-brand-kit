@@ -1,77 +1,27 @@
-# FUD.markets — Brief for Lovable
+# FUD Markets — V2 BLUE Lovable Brief
 
-Paste the block below into Lovable as your project prompt. Upload the files in
-`assets/logos/` and `assets/reference/` to Lovable first so it uses the real logo
-and can see the real aesthetic. Design UI only, with mock data. Do not wire any
-backend.
+Upload the assets selected in [ASSETS.md](ASSETS.md), especially `assets/logos-v2/fud-3d-wordmark-blue.jpg`, and provide [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md). Do not upload `archive/v1/` as current inspiration.
 
----
+## Paste this brief
 
-## Paste this into Lovable
+Build a **UI-only FUD Markets V2 prototype** with hardcoded demonstration data. Follow the blue rebrand and the public reference frontend: https://github.com/theboyplunger0x/fud-rebrand-frontend . No backend, database, real login, wallet connection, deposits, withdrawals, or transactions.
 
-Build a UI-only design prototype for **FUD.markets**, a crypto prediction market
-where users go **LONG** or **SHORT** on the future price of tokens across
-timeframes. This is a redesign pass on the **frontend UI/UX only**. Use mock /
-placeholder data. Do **not** add a backend, Supabase, auth, or a database. Do not
-add login. Keep everything client-side with hardcoded sample data.
+Use a white/light-first canvas, near-black ink, FUD blue `#0000FF` for brand controls, and restrained blue glass fills, gradients, and shadows. Support dark mode with primary `oklch(0.68 0.18 280)`, not an emerald brand primary. Green/red are semantic LONG/SHORT and PnL colors. Use the exact tokens in DESIGN_SYSTEM.md and reference/tokens.css.
 
-**Visual identity (follow this exactly):**
+Use **DM Sans** for UI/headings and **JetBrains Mono** for numerical data with tabular figures. Load them from Google Fonts; font files are not bundled. Use the supplied blue 3D wordmark for the light shell. Preserve the source utility icons and monochrome dark-mode mark where applicable. Do not redraw or generate a logo.
 
-- **Aesthetic:** a near-black trading terminal that reads like an editorial zine.
-  Dark-first. Sharp, dense, confident, anti-bullshit. It should feel trading-native,
-  not like a bank or a generic SaaS dashboard. Avoid rounded pastel "friendly fintech"
-  looks, avoid cream backgrounds, avoid generic shadcn defaults.
+The implementation reference is **React 19 + TanStack Start/Router + Vite 8 + Tailwind CSS 4**, with Radix/shadcn-style UI components and Framer Motion. This is not a request to recreate the old Next.js, black/emerald, Geist/Inter interface. Match the source components and semantic tokens, not untouched component-library defaults.
 
-- **Canvas:** near-black background `#0A0A0A`. Support a light mode too
-  (`#F9FAFB` canvas with white cards, `#111827` text), but dark is the hero.
+Design the market feed/cards, market detail and LONG/SHORT entry, portfolio with shares/order states, and responsive mobile dialogs/sheets. Keep entry/live token prices distinct from share prices, indicative quotes, and estimated payouts. Use the V2 terms in PRODUCT.md and display-only fixtures in MOCK_DATA.md. Do not implement settlement or calculate executable quotes from a design formula.
 
-- **Signal colors, used ONLY for meaning, never decoration:**
-  - Emerald `#34D399` = LONG / up / positive / win
-  - Red `#F87171` = SHORT / down / negative / loss
-  - Everything else is monochrome: white or black with an opacity ladder
-    (text-white, then 55%, 50%, 45%, 40%, 35%, 30%, 25%, 20% for hierarchy).
+Cards use white surfaces, cool hairline borders, rounded corners, subtle shadows, and restrained hover lift. Use blue-tinted glass for general actions. Keep all important financial information legible: side, amount, share count, quote qualification, balance, order state, and any existing warning. Do not communicate side or success by color alone.
 
-- **Typography:**
-  - Headings: **Geist**, weight **900 (black)**, tight letter-spacing.
-  - **All numbers, prices, PnL, multipliers: monospace (Geist Mono) with
-    tabular-nums** so they line up like a terminal readout. This is a signature,
-    never render a price in a proportional font.
-  - Body: **Inter**, medium (500).
-  - Tiny **uppercase labels at wide letter-spacing (0.18em)** act as section
-    dividers/rules. Use them a lot.
+Include loading, empty, error, unavailable quote, disabled, submitting, matching, partial fill, and settled/void cases where relevant. Prototype actions must be visibly simulated. Do not show a real deposit address or copy a production credential.
 
-- **Surfaces:** cards are `rounded-2xl`, ultra-thin fill (white at ~3% opacity on
-  dark), hairline borders (white at ~8% opacity), subtle border brighten on hover.
-  Pills/tags are `rounded-full`, tiny, bold. Hierarchy comes from opacity and
-  spacing, not from heavy shadows or bright fills.
+Keep copy short and trading-native. Financial confirmations and failures must be plain and exact. No invented leverage, yield, token-reward promises, fixed fees, or guaranteed fills. V2 has share orders and selling states: do not import the old V1 no-secondary-market rule or losing-pool multiplier formula.
 
-- **Prestige treatment:** for "official" or "market maker" items, use an animated
-  conic-gradient holographic border (gold for official/admin, rose for market
-  maker). This is how status is shown, through motion, not loud chrome.
+Deliver portable components, a preview URL, and a short list of changed screens and covered states. The preview is for review, not authorization to deploy.
 
-- **Motion:** tasteful. Framer-motion style micro-interactions. Do not over-animate.
+## Handoff
 
-**Voice / copy:** talk like a trader, not a bank. Short, direct, a little degen.
-Example headline: "Go LONG or SHORT on any token." Quick bet amounts: $10, $25, $50, $100.
-
-**Screens to design (see SCOPE.md for the full list):** the market/token card, the
-trade panel (LONG/SHORT with amount + multiplier), a user's open positions with
-live PnL, the feed, and the mobile trading sheet. Focus on visual hierarchy, the
-trading moment, and mobile.
-
-Use the FUD logo I uploaded. Match the colors and type above precisely. Deliver
-clean Tailwind. Keep components simple and portable (avoid deep component-library
-abstractions where a plain element works).
-
----
-
-## After Lovable generates
-
-1. Iterate in Lovable until the screens feel right.
-2. Share the **preview URL** with Marcos (do not worry about exporting code, the
-   preview is the spec).
-3. Marcos re-implements the approved screens in the real FUD stack
-   (Next.js App Router + Tailwind v4 + custom theme + Framer Motion).
-
-See `DESIGN_SYSTEM.md` for exact tokens if you want to hand-tune, and `SCOPE.md`
-for what to design and what not to touch.
+Review scope against [SCOPE.md](SCOPE.md). If a new screen changes authentication, money movement, fees, or settlement behavior, stop and ask for product approval before expanding the prototype. Production integration remains a separate, explicitly scoped task.

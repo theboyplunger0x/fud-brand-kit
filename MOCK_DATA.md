@@ -1,126 +1,103 @@
-# FUD.markets — Mock Data
+# V2 BLUE — Display-only Mock Data
 
-Realistic sample data so screens look convincing without a backend. Copy these
-into Lovable as hardcoded data. Numbers are illustrative but shaped like the real app.
+These fixtures are **illustrative UI data, not API payloads, live quotes, trading instructions, or valid transactions**. They intentionally use a small display model. Do not wire them to a wallet or backend. Token names are examples; no token availability is promised.
 
-## Market cards (feed)
+For application integration, use the public frontend's actual `V2Market`, `V2Position`, `V2Order`, and quote types. A design fixture is not a replacement for pricing or settlement logic.
 
-```jsonc
+## Market cards
+
+```json
 [
   {
-    "symbol": "CASHCAT",           // shown as $CASHCAT
-    "chain": "Base",
-    "timeframe": "1h",
-    "status": "live",              // open | live | settling | resolved | cancelled | draw
-    "entry_price": 0.00421,
-    "current_price": 0.00508,      // +20.7% vs entry → LONG winning
-    "long_pool": 1240.00,          // USDC
-    "short_pool": 680.00,
-    "volume_usd": 1920.00,
-    "closes_at_in": "27m",         // time remaining label
-    "long_multiplier": 1.49,       // 1 + (680*0.9/1240)
-    "short_multiplier": 2.64       // 1 + (1240*0.9/680)
+    "id": "demo-sol-live",
+    "ticker": "SOL",
+    "tokenChainLabel": "Solana",
+    "timeframeLabel": "1h",
+    "status": "live",
+    "entryTokenPriceUsd": "142.50",
+    "liveTokenPriceUsd": "144.21",
+    "longSharePriceCents": 58,
+    "shortSharePriceCents": 42,
+    "quoteLabel": "Illustrative quote",
+    "volumeUsdc": "1920.00",
+    "traderCount": 24,
+    "remainingLabel": "27m"
   },
   {
-    "symbol": "PEPE",
-    "chain": "Base",
-    "timeframe": "15m",
-    "status": "open",
-    "entry_price": 0.00000812,
-    "current_price": 0.00000812,
-    "long_pool": 0,
-    "short_pool": 50.00,
-    "volume_usd": 50.00,
-    "closes_at_in": "starts in 3m",
-    "long_multiplier": 1.90,
-    "short_multiplier": 1.00        // one-sided so far
+    "id": "demo-bonk-pending",
+    "ticker": "BONK",
+    "tokenChainLabel": "Solana",
+    "timeframeLabel": "15m",
+    "status": "pending",
+    "entryTokenPriceUsd": "0.00002138",
+    "liveTokenPriceUsd": null,
+    "longSharePriceCents": null,
+    "shortSharePriceCents": null,
+    "quoteLabel": "Quote unavailable",
+    "volumeUsdc": "0.00",
+    "traderCount": 0,
+    "remainingLabel": "Awaiting market start"
   },
   {
-    "symbol": "DEGEN",
-    "chain": "Base",
-    "timeframe": "4h",
-    "status": "resolved",
-    "entry_price": 0.0113,
-    "final_price": 0.0098,          // -13.3% → SHORT won
-    "winner_side": "short",
-    "long_pool": 900.00,
-    "short_pool": 1500.00,
-    "volume_usd": 2400.00,
-    "closed_label": "Settled 12m ago"
-  },
-  {
-    "symbol": "WIF",
-    "chain": "Solana",
-    "timeframe": "24h",
-    "status": "draw",
-    "entry_price": 2.41,
-    "final_price": 2.415,           // +0.2% → below threshold → draw/refund
-    "long_pool": 420.00,
-    "short_pool": 380.00,
-    "volume_usd": 800.00,
-    "closed_label": "Draw · refunded"
+    "id": "demo-wif-settled",
+    "ticker": "WIF",
+    "tokenChainLabel": "Solana",
+    "timeframeLabel": "4h",
+    "status": "settled",
+    "outcome": "short",
+    "entryTokenPriceUsd": "2.41",
+    "finalTokenPriceUsd": "2.38",
+    "volumeUsdc": "2400.00",
+    "traderCount": 36,
+    "closedLabel": "Settled 12m ago"
   }
 ]
 ```
 
-## User positions (portfolio / open positions)
+## Position and order display
 
-```jsonc
-[
-  {
-    "symbol": "CASHCAT", "chain": "Base", "timeframe": "1h",
-    "side": "long", "amount_usd": 50.00,
-    "market_status": "live", "entry_price": 0.00421, "current_price": 0.00508,
-    "unrealized_pnl": 24.50, "multiplier": 1.49, "closes_at_in": "27m"
-  },
-  {
-    "symbol": "DEGEN", "chain": "Base", "timeframe": "4h",
-    "side": "long", "amount_usd": 100.00,
-    "market_status": "resolved", "winner_side": "short",
-    "outcome": "lost", "realized_pnl": -100.00
-  },
-  {
-    "symbol": "BONK", "chain": "Solana", "timeframe": "12h",
-    "side": "short", "amount_usd": 25.00,
-    "market_status": "resolved", "winner_side": "short",
-    "outcome": "won", "realized_pnl": 41.20
-  },
-  {
-    "symbol": "WIF", "chain": "Solana", "timeframe": "24h",
-    "side": "long", "amount_usd": 30.00,
-    "market_status": "draw", "outcome": "refunded", "realized_pnl": 0.00
-  }
-]
-```
-
-## Users / avatars (feed, leaderboard)
-
-```jsonc
-[
-  { "username": "0xplunger",  "tier": "top",   "pnl_24h": 312.40, "verified": true },
-  { "username": "degenmaxi",  "tier": "pro",   "pnl_24h": -84.10, "verified": true },
-  { "username": "fudteam",    "tier": "elite", "pnl_24h": 0,      "official": true },  // gold holo + gradient name
-  { "username": "cashcat_ape","tier": null,    "pnl_24h": 57.00,  "verified": false }
-]
-```
-
-## Header / balance
-
-```jsonc
+```json
 {
-  "balance_usd": 214.83,          // Vault balance (mono, tabular)
-  "total_pnl": 88.10,
-  "fud_points_estimated": 1240,   // "Estimated FUD Points" pill
-  "quick_amounts": [10, 25, 50, 100]
+  "position": {
+    "ticker": "SOL",
+    "side": "long",
+    "ownedShares": 100,
+    "lockedShares": 20,
+    "availableShares": 80,
+    "averageCostCents": 52,
+    "markPriceCents": 58,
+    "costBasisUsdc": "52.00",
+    "displayedValueUsdc": "58.00",
+    "unrealizedPnlUsdc": "6.00",
+    "realizedPnlUsdc": "0.00"
+  },
+  "order": {
+    "ticker": "SOL",
+    "assetSide": "long",
+    "action": "sell",
+    "status": "partial",
+    "requestedShares": 25,
+    "filledShares": 5,
+    "remainingShares": 20,
+    "limitPriceCents": 60,
+    "label": "Partially filled · 20 shares remaining"
+  },
+  "balance": {
+    "totalUsdc": "214.83",
+    "earmarkedUsdc": "25.00",
+    "availableUsdc": "189.83"
+  }
 }
 ```
 
-Notes:
-- Prices, PnL, multipliers, pools, balances: always **monospace + tabular-nums**.
-- Positive numbers emerald, negative red. Neutral (draw/refund) stays monochrome.
-- Symbols render as `$SYMBOL`. Chains: Base and Solana (text label or small chip, no
-  official icon assets are shipped, use a simple chip).
-- **Design for the ugly cases too**, not just clean numbers: long token symbols
-  (`$SUPERLONGNAME`), tiny prices (`0.00000000812`), huge multipliers (`38.4x`),
-  zero / negative PnL, an empty pool ($0 on one side), and a market about to close
-  (seconds left). These are where layouts break.
+The position's displayed mark value is not a guaranteed sell amount. The order example does not promise liquidity. These values illustrate layout and arithmetic relationships only; fees and executable proceeds must come from a real application quote when integrating.
+
+## Edge cases to render
+
+- Unavailable token live price and unavailable quote: use an explicit fallback/label, not a fabricated executable value.
+- `resolving`, `void`, `cancelled`, and settled `draw`: show the provided result without calculating an invented refund.
+- Matching with zero confirmed shares; partial fill; failed action; no positions; loading and retryable error.
+- Long symbol `$SUPERLONGNAME`, tiny price `$0.00000000812`, large balance `$1,234,567.89`, negative and zero PnL.
+- A position whose shares are all locked, or a sell preview that cannot fill the full amount.
+
+Use JetBrains Mono and tabular figures. Blue denotes brand/selection; green/red denotes side or signed financial movement; neutral and unavailable values stay neutral. Demo usernames should be fictional (for example `demo_trader`), and utility avatars should come from the supplied assets.
