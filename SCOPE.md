@@ -1,6 +1,6 @@
 # V2 BLUE — Design Scope and Handoff
 
-This kit supports a visual/UI handoff aligned with the [current public frontend](https://github.com/theboyplunger0x/fud-rebrand-frontend). It is not an application deployment package.
+This kit supports focused edits to the **existing [public V2 frontend](https://github.com/theboyplunger0x/fud-rebrand-frontend)**, not a new application or a ground-up redesign. See [CURRENT_STATE.md](CURRENT_STATE.md) for the verified 2026-09-06 source snapshot. It is not an application deployment package.
 
 ## In scope
 
@@ -9,7 +9,7 @@ This kit supports a visual/UI handoff aligned with the [current public frontend]
 - Market detail/trade-panel layout and its mobile presentation.
 - Portfolio presentation, including owned/locked shares and relevant order states.
 - Existing light/dark treatment, accessible focus, readable financial signals, and responsive behavior.
-- Loading, empty, error, unavailable-data, pending/matching, partial-fill, and terminal-state mockups.
+- Loading, empty, error, unavailable-data, pending/matching, partial-fill, and terminal-state UI coverage using targeted local fixtures.
 
 Match [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md). Green and red remain financial semantics; general brand emphasis remains blue in both themes.
 
@@ -32,13 +32,14 @@ Preserve existing warnings, state distinctions, and financial meaning. A design 
 - [ ] No-data and zero values are distinguishable; estimates and partial outcomes are labelled.
 - [ ] Mobile and desktop work with long tickers, tiny prices, large numbers, dialogs, and keyboard focus.
 - [ ] Motion can be reduced, touch controls are usable, and information does not depend on color alone.
-- [ ] All actions and data in a design-only preview are clearly simulated.
-- [ ] Handoff lists changed screens, covered states, and remaining design decisions.
+- [ ] Existing local adapters, synthetic data, and demo notices remain intact; no private service is introduced.
+- [ ] Handoff includes the focused diff/PR, screenshots, validation results, covered states, and remaining design decisions.
 
 ## Workflow
 
-1. Start from the public frontend and this kit's source/provenance notes.
-2. Make one coherent batch of UI changes using mock data.
-3. Share the preview and screen/state checklist for review.
-4. Integrate approved UI in a separate application task with appropriate tests.
-5. Commit/push or coding approval is **not** production deployment approval. Deploy only on explicit authorization.
+1. Read the public frontend's README/AGENTS and this kit's [designer brief](DESIGNER_BRIEF.md); work in a review branch from its current `main`.
+2. Run the existing app with Node.js 22.12+, `npm ci`, and `npm run dev`. Do not scaffold a replacement project.
+3. Edit the requested existing routes/components. Keep fixtures in `src/lib/demo-data.ts` and local adapters in `src/lib/api.ts` / `src/lib/v2Api.ts`; see [MOCK_DATA.md](MOCK_DATA.md).
+4. Run `npm run typecheck`, `npm run build`, `npm run verify:design`, and `npm run test:demo`. Inspect the affected screens on mobile/desktop and in both themes.
+5. Share the code diff or PR, screenshots, test results, and covered states. Coordinate any public hosting or private-app integration separately.
+6. Commit/push or coding approval is **not** production deployment approval. Deploy only on explicit authorization.

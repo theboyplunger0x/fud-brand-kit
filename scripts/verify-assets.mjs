@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -17,7 +17,26 @@ function filesUnder(directory) {
   });
 }
 
-assert.equal(manifest.schemaVersion, 1);
+assert.equal(manifest.schemaVersion, 2);
+assert.equal(manifest.privateSource.visibility, "private");
+assert.match(manifest.verifiedOn, /^\d{4}-\d{2}-\d{2}$/);
+assert.equal(
+  manifest.publicReference.repository,
+  "https://github.com/theboyplunger0x/fud-rebrand-frontend",
+);
+for (const commit of [
+  manifest.privateSource.assetBaselineCommit,
+  manifest.privateSource.stylesheetCommit,
+  manifest.privateSource.verifiedRevision,
+  manifest.publicReference.verifiedRevision,
+  manifest.archiveSource.commit,
+]) {
+  assert.match(commit, /^[a-f0-9]{40}$/, "Provenance revisions must be full Git hashes");
+}
+assert.notEqual(manifest.publicReference.verifiedRevision, manifest.privateSource.assetBaselineCommit);
+assert.notEqual(manifest.publicReference.verifiedRevision, manifest.privateSource.stylesheetCommit);
+assert(!("sourceRepository" in manifest), "Do not conflate the public repository with private source commits");
+assert(!("sourceBaselineCommit" in manifest), "Source provenance must be scoped explicitly");
 assert.equal(manifest.assets.length, 10, "Expected all 10 current visual assets");
 assert.equal(manifest.archive.length, 18, "Expected all 18 original V1 documents/assets/references");
 
@@ -61,4 +80,56 @@ for (const asset of manifest.assets) {
   assert(assetIndex.includes(asset.sha256), `Hash missing from human index: ${asset.path}`);
 }
 
-console.log("PASS: 10 V2 visual assets, 18 preserved V1 files, stylesheet/token integrity, blue dark primary, and asset index.");
+const adaptations = manifest.assets.filter((asset) => asset.adaptation);
+assert.equal(adaptations.length, 1, "Only the avatar has an export adaptation");
+const avatar = adaptations[0];
+assert.equal(avatar.path, "assets/utility/profile-avatar.svg");
+assert.equal(avatar.adaptation.type, "metadata-only");
+assert.equal(avatar.adaptation.field, "svg:title");
+assert.equal(avatar.adaptation.value, "FUD V2 demo profile avatar");
+assert.match(avatar.sourceSha256, /^[a-f0-9]{64}$/);
+assert.notEqual(avatar.sha256, avatar.sourceSha256);
+assert(assetIndex.includes(avatar.sourceSha256), "Document the original avatar source hash");
+const avatarSvg = read(avatar.path).toString();
+assert.equal(avatarSvg.match(/<title\b/g)?.length, 1, "Avatar must have one accessible title");
+assert(avatarSvg.includes(`<title id="title">${avatar.adaptation.value}</title>`));
+assert.equal(
+  sha256(avatarSvg.replace(/<title id="title">[^<]*<\/title>/, '<title id="title"></title>')),
+  avatar.adaptation.contentExcludingTitleSha256,
+  "Avatar changes outside the accessible title are not allowed by this adaptation",
+);
+
+const activeDocs = [
+  ...readdirSync(root).filter((file) => file.endsWith(".md")),
+  ...filesUnder(join(root, "reference")).filter((file) => file.endsWith(".md")),
+];
+assert(activeDocs.includes("DESIGNER_BRIEF.md"), "The current designer brief is required");
+assert(activeDocs.includes("CURRENT_STATE.md"), "The dated source/scope record is required");
+assert(!existsSync(join(root, "LOVABLE_BRIEF.md")), "Retired brief must not remain an active entry point");
+let localLinks = 0;
+for (const file of activeDocs) {
+  const content = read(file).toString();
+  assert.doesNotMatch(content, /lovable/i, `${file}: retired workflow in active documentation`);
+  for (const match of content.matchAll(/\]\(([^)]+)\)/g)) {
+    const target = match[1];
+    if (/^(?:https?:|#)/.test(target)) continue;
+    const fileTarget = target.split("#")[0];
+    assert(existsSync(resolve(root, dirname(file), fileTarget)), `${file}: missing link ${target}`);
+    localLinks++;
+  }
+}
+const state = read("CURRENT_STATE.md").toString();
+assert(state.includes(manifest.verifiedOn), "Document the verification date");
+for (const commit of [
+  manifest.privateSource.assetBaselineCommit,
+  manifest.privateSource.verifiedRevision,
+  manifest.publicReference.verifiedRevision,
+  manifest.archiveSource.commit,
+]) {
+  assert(state.includes(commit), "Current-state record must match manifest provenance");
+}
+for (const block of read("MOCK_DATA.md").toString().matchAll(/```json\n([\s\S]*?)\n```/g)) {
+  JSON.parse(block[1]);
+}
+
+console.log(`PASS: 10 V2 exports (9 exact-source assets + 1 title-only avatar), 18 unchanged V1 files, CSS/token hashes, blue dark primary, scoped provenance, current workflow, and ${localLinks} active documentation links.`);

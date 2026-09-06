@@ -1,6 +1,6 @@
 # FUD Markets — V2 BLUE Design System
 
-Current direction: **white canvas, FUD blue, near-black ink, 3D wordmark, and restrained blue glass surfaces**. Dark mode is supported with an accessible lighter blue primary. Green and red communicate LONG/SHORT and financial direction, not the overall brand.
+Verified design direction on 2026-09-06: **white canvas, FUD blue, near-black ink, 3D wordmark, and restrained blue glass surfaces**. Preserve this system when editing the existing frontend. Dark mode is supported with an accessible lighter blue primary. Green and red communicate LONG/SHORT and financial direction, not the overall brand. See [CURRENT_STATE.md](CURRENT_STATE.md) for the dated scope.
 
 Exact values live in [reference/tokens.css](reference/tokens.css); full Tailwind mappings and component treatments live in [reference/source-styles.css](reference/source-styles.css). These reflect the source snapshot and dark correction described in [reference/README.md](reference/README.md).
 
@@ -51,7 +51,7 @@ No active font binaries are bundled. Do not use the archived Geist/Inter instruc
 - `.fud-glass-primary`: blue 14% fill, blue 18% border, blue shadow, 2px backdrop blur. Hover increases fill to 23%.
 - `.fud-glass-hero` uses a subtle blue linear gradient, white highlight, and layered shadow. `.fud-hero-cta` uses a stronger blue fill with white text.
 - Dark glass treatments are defined explicitly in the source stylesheet; do not invert light colors mechanically.
-- Keep hover lifts and transitions restrained. Respect reduced-motion preferences in prototypes; trading state changes must remain understandable without animation.
+- Keep hover lifts and transitions restrained. Respect reduced-motion preferences in UI changes; trading state changes must remain understandable without animation.
 
 Use the public frontend as the layout reference rather than inventing a new breakpoints system. Verify mobile and desktop, including long tickers, tiny prices, large balances, sheets/dialogs, and visible focus states.
 

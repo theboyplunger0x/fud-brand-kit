@@ -1,10 +1,25 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "identity": "FUD Markets V2 BLUE",
-  "sourceRepository": "https://github.com/theboyplunger0x/fud-rebrand-frontend",
-  "sourceBaselineCommit": "c26fa4946bfb4ac3c5287155dceb0235e48a4789",
-  "styleCorrection": "Source baseline plus dark primary/ring/sidebar-primary/sidebar-ring/chart-1 set to oklch(0.68 0.18 280); semantic up/down unchanged.",
-  "archiveSourceCommit": "a4b32620f0a6b644bb475c75d20389602d61e2d0",
+  "verifiedOn": "2026-09-06",
+  "privateSource": {
+    "visibility": "private",
+    "description": "FUD V2 frontend origin; source commits are not public-repository revisions and private access is not required for design work.",
+    "assetBaselineCommit": "c26fa4946bfb4ac3c5287155dceb0235e48a4789",
+    "stylesheetCommit": "01eb183a06164b3d044e53ed073bc9c0beeb2b01",
+    "verifiedRevision": "01eb183a06164b3d044e53ed073bc9c0beeb2b01"
+  },
+  "publicReference": {
+    "repository": "https://github.com/theboyplunger0x/fud-rebrand-frontend",
+    "verifiedRevision": "19b56a798c62a1d16e4c9f4eaeb93c223856d1d4",
+    "role": "Existing editable V2 UI with synthetic local adapters; not a production deployment or financial-engine reference. Asset sourcePath values identify matching public export copies at the verified revision, including the accessible-title-only avatar adaptation."
+  },
+  "styleCorrection": "Committed private stylesheet correction and matching public copy: dark primary/ring/sidebar-primary/sidebar-ring/chart-1 set to oklch(0.68 0.18 280); semantic up/down unchanged.",
+  "archiveSource": {
+    "repository": "https://github.com/theboyplunger0x/fud-brand-kit",
+    "commit": "a4b32620f0a6b644bb475c75d20389602d61e2d0",
+    "status": "Obsolete V1 snapshot preserved unchanged; not current design/product/workflow guidance."
+  },
   "assets": [
     {
       "path": "assets/logos-v2/fud-3d-wordmark-black.jpg",
@@ -44,7 +59,15 @@
     {
       "path": "assets/utility/profile-avatar.svg",
       "sourcePath": "public/profile-avatar.svg",
-      "sha256": "3d561ea71c49aacd225b135bf04b964b149017e7bc0cc0e756a082fee045a9ce"
+      "sha256": "e106ab632e5e758991fe87101f5d21d0e44dfbcb0fd347d26edb8ead128d14d1",
+      "sourceSha256": "3d561ea71c49aacd225b135bf04b964b149017e7bc0cc0e756a082fee045a9ce",
+      "adaptation": {
+        "type": "metadata-only",
+        "field": "svg:title",
+        "value": "FUD V2 demo profile avatar",
+        "contentExcludingTitleSha256": "4d632e31c10b00b3f30ce4d78481cc9c28377fe6c7cfac0e2d778109be250f6e",
+        "note": "Only the accessible title text changes; geometry, colors, description, and all other SVG content remain unchanged."
+      }
     },
     {
       "path": "assets/reference-v2/fud-social-card.png",

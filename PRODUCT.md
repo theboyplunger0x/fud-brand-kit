@@ -1,6 +1,8 @@
 # FUD Markets V2 — Product Vocabulary for Designers
 
-FUD's current source describes **Solana-native LONG and SHORT share markets on token prices**. This document is a UI orientation, not a specification for contracts, pricing, or settlement. The public frontend's `src/lib/v2Types.ts`, `src/lib/v2Market.ts`, and `src/components/v2/` are the implementation references.
+FUD's V2 source describes **Solana-native LONG and SHORT share markets on token prices**. Verified on 2026-09-06 against the private/public revisions in [CURRENT_STATE.md](CURRENT_STATE.md). This document is UI vocabulary, not a contract, pricing, settlement, deployment, or mainnet-readiness specification.
+
+Designers edit the **existing public frontend**, whose `src/lib/v2Types.ts`, `src/lib/v2Market.ts`, and `src/components/v2/` supply the UI structure. Its API-shaped adapters contain synthetic local behavior, not the authoritative financial engine. [MOCK_DATA.md](MOCK_DATA.md) documents what that demo actually does.
 
 Do not reuse the archived V1 model of distributing a losing pool, a fixed 10% fee, fixed legacy timeframes, or a prohibition on selling positions. V2 exposes share positions, orders, quotes, and sell previews.
 
@@ -9,9 +11,9 @@ Do not reuse the archived V1 model of distributing a losing pool, a fixed 10% fe
 1. Browse a token/timeframe market and its status.
 2. Inspect the market detail, token entry/live price, and LONG/SHORT share quote.
 3. Select a side and amount; review the current estimate and warnings.
-4. Submit in the real app; show the returned matching/confirmation/fill state accurately. In a design preview, simulate and label this action.
-5. Inspect positions and orders. Selling or cancelling is available only when the current app allows it; never imply an instant or guaranteed exit.
-6. Display the actual settled, void, or cancelled result when supplied. Do not invent refund amounts or settlement rules in UI work.
+4. Use the existing local demo action and preserve its matching/confirmation/fill labels. No real order is sent from the public frontend.
+5. Inspect positions and orders. Its sell/cancel controls manipulate synthetic state only; never imply that a local simulated fill proves an instant or guaranteed real exit.
+6. Preserve settled, void, cancelled, and outcome states when supplied by a targeted fixture. Do not invent refund amounts or settlement rules in UI work.
 
 ## Terms and units
 
@@ -21,6 +23,8 @@ Do not reuse the archived V1 model of distributing a losing pool, a fixed 10% fe
 | Token entry / live price | Price of the underlying token in USD, not the share price |
 | Share price | Price in cents; display distinctly from the underlying token price |
 | Shares | Position/order quantity; owned, locked, matching, and confirmed amounts may differ |
+| `sharesCenti` / related `*Centi` share counts | Hundredths of a share, not dollars or price cents; use the typed display/share fields appropriately |
+| `V2Order` budget fields | `budgetUsdc`, `remainingBudgetUsdc`, and `feeReserveUsdc` are integer USDC base units (1 USDC = 1,000,000 units), unlike decimal-string balance/cost fields |
 | Multiplier / estimated payout | Quote-related display, not the V1 losing-pool formula or a promised return |
 | Available balance | Amount available to act with; not interchangeable with total or earmarked balance |
 | Buy / sell order | Action on a specified LONG/SHORT side; do not rename the market sides BUY/SELL |
@@ -37,7 +41,9 @@ The source market status union is `pending`, `live`, `resolving`, `settled`, `vo
 
 The UI also needs loading/empty/error states, invalid amount, disabled action with a reason, submitting, matching, partial/filled results, and failed/cancelled actions as applicable. Respect locked shares and outstanding orders when presenting available quantities.
 
-Fees, tradeable timeframes, eligibility, and executable amounts come from the runtime/application. Do not hardcode rules from this kit. Market-token chain metadata is also distinct from the Solana settlement platform.
+In a real integration, fees, tradeable timeframes, eligibility, and executable amounts come from the runtime/application. In the public demo, corresponding values are fixtures. Neither the kit nor the demo establishes current production rules. Market-token chain metadata is also distinct from the Solana settlement platform.
+
+Some V2 data fields retain `pool` in their names for presentation/compatibility. Their presence does not authorize importing the old losing-pool multiplier or refund formula. Use the existing typed fields and helpers, and leave financial-engine changes outside a styling task.
 
 ## Copy boundaries
 
